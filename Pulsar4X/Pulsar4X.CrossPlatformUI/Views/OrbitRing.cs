@@ -129,7 +129,7 @@ namespace Pulsar4X.CrossPlatformUI.Views
             //sure which number should get plugged in there, but once that is found planet orbits should work. I got the 53.5 by getting mercury's proper
             //correction of 11, then working with eccentricity found that 53.5 * mercury's eccentricity is roughly the value I want. this is also correctish for
             //mars, earth and venus, so I'm close to whatever the right answer is.
-            AngleAdd = AngleAdd  * (53.5f * (float)_orbitDB.Eccentricity);
+            AngleAdd = AngleAdd  * (60.0f * (float)_orbitDB.Eccentricity);
 
             //draw the elipse (as a number of arcs each with a different pen, this gives the fading alpha channel effect) 
             int i = 0;
@@ -145,19 +145,19 @@ namespace Pulsar4X.CrossPlatformUI.Views
             g.RestoreTransform();
 
             Font lastFont = new Font(FontFamilies.MonospaceFamilyName, 10.0f);
-            if(drawCount == 2)
+            if(drawCount == 0)
             {
                 g.SaveTransform();
                 String Entry = String.Format("{0} {1} {2} {3} {4} {5}", _rotation, StartArcAngle, ActualAngle, AngleAdd, _bodyPositionDB.X, _bodyPositionDB.Y);
                 g.DrawText(lastFont, Colors.White, 10, 10, Entry);
 
-                Entry = String.Format("Values: {0} {1} {2} {3} {4} {5}", TopLeftX, TopLeftY, _width, _height,rotatePoint.X,rotatePoint.Y);
-                g.DrawText(lastFont, Colors.White, 10, 30, Entry);
+                /*Entry = String.Format("Values: {0} {1} {2} {3} {4} {5}", TopLeftX, TopLeftY, _width, _height,rotatePoint.X,rotatePoint.Y);
+                g.DrawText(lastFont, Colors.White, 10, 30, Entry);*/
 
 
                 g.RestoreTransform();
             }
-            if (drawCount == 3)
+            /*if (drawCount == 3)
             {
                 g.SaveTransform();
 
@@ -169,7 +169,7 @@ namespace Pulsar4X.CrossPlatformUI.Views
 
 
                g.RestoreTransform();
-            }
+            }*/
             drawCount++;
             if (drawCount == 5)
                 drawCount = 0;
